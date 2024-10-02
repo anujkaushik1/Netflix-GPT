@@ -1,5 +1,6 @@
 import React from 'react'
 import useNowPlayingMoviesData from '../hooks/useNowPlayingMoviesData';
+import MainContainer from './MainContainer';
 
 
 export const Browse = () => {
@@ -9,7 +10,9 @@ export const Browse = () => {
   
 
   return (
-    <></>
+    <div>
+        <MainContainer/>
+    </div>
   )
 }
 

@@ -1,17 +1,5 @@
-const anuj = () => {
-    return new Error('hey er')
-}
+const a = 10;
 
 function main(){
-    const h = anuj()
-    if(h instanceof Error){
-        console.log('wor');
-        
-    }
-    else{
-        console.log('mo');
-        
-    }
+    const a =200-20;
 }
-
-main()
