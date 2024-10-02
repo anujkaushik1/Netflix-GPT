@@ -58,7 +58,7 @@ const Login = () => {
     }
   };
 
-  const handleSigninSignUp = () => {
+const handleSigninSignUp = async() => {
     try {
       const validationResponse = checkEmailNamePasswordForLogin({
         name: name.current?.value,
@@ -73,12 +73,12 @@ const Login = () => {
       }
 
       if (isSignIn)
-        signInUser({
+        await signInUser({
           email: email.current?.value,
           password: password.current.value,
         });
       else
-        signUpUser({
+        await signUpUser({
           name: name.current?.value,
           email: email.current?.value,
           password: password.current.value,
