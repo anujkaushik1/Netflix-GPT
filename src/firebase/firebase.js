@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  signOut,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -34,5 +35,6 @@ export const firebaseApi = {
   signUpWithEmailPassword: createUserWithEmailAndPassword,
   signInWithEmailPassword: signInWithEmailAndPassword,
   authChange: onAuthStateChanged,
-  updateUser: updateProfile
+  updateUser: updateProfile,
+  signOutUser: signOut
 };

@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkEmailNamePasswordForLogin } from "../utils/validation";
 import { auth, firebaseApi } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../store/slices/users";
 
@@ -15,7 +14,6 @@ const Login = () => {
     apiError: "",
   });
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const name = useRef(null);
@@ -43,6 +41,7 @@ const Login = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       setErrors({ apiError: errorCode + "  " + errorMessage });
+      throw error;
     }
   };
 
@@ -55,6 +54,7 @@ const Login = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       setErrors({ apiError: errorCode + "  " + errorMessage });
+      throw error;
     }
   };
 
@@ -84,7 +84,6 @@ const handleSigninSignUp = async() => {
           password: password.current.value,
         });
 
-      navigate("/browse");
     } catch (error) {}
   };
 
