@@ -2,6 +2,9 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkEmailNamePasswordForLogin } from "../utils/validation";
 import { auth, firebaseApi } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../store/slices/users";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -12,6 +15,9 @@ const Login = () => {
     apiError: "",
   });
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const name = useRef(null);
   const password = useRef(null);
   const email = useRef(null);
@@ -20,7 +26,17 @@ const Login = () => {
 
   const signUpUser = async ({ name, email, password } = {}) => {
     try {
-      return await firebaseApi.signUpWithEmailPassword(auth, email, password);
+      await firebaseApi.signUpWithEmailPassword(
+        auth,
+        email,
+        password
+      );
+
+      await firebaseApi.updateUser(auth.currentUser, {
+        displayName: name,
+      });
+
+      dispatch(updateUser({ displayName: name }));
     } catch (error) {
       console.log("signupError: ", error);
 
@@ -43,29 +59,33 @@ const Login = () => {
   };
 
   const handleSigninSignUp = () => {
-    const validationResponse = checkEmailNamePasswordForLogin({
-      name: name.current?.value,
-      password: password.current.value,
-      email: email.current.value,
-    });
-
-    setErrors(validationResponse);
-
-    for (const key in validationResponse) {
-      if (validationResponse[key]) return;
-    }
-
-    if (isSignIn)
-      return signInUser({
-        email: email.current?.value,
+    try {
+      const validationResponse = checkEmailNamePasswordForLogin({
+        name: name.current?.value,
         password: password.current.value,
+        email: email.current.value,
       });
 
-    signUpUser({
-      name: "",
-      email: email.current?.value,
-      password: password.current.value,
-    });
+      setErrors(validationResponse);
+
+      for (const key in validationResponse) {
+        if (validationResponse[key]) return;
+      }
+
+      if (isSignIn)
+        signInUser({
+          email: email.current?.value,
+          password: password.current.value,
+        });
+      else
+        signUpUser({
+          name: name.current?.value,
+          email: email.current?.value,
+          password: password.current.value,
+        });
+
+      navigate("/browse");
+    } catch (error) {}
   };
 
   return (
