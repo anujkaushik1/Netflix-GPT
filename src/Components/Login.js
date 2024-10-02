@@ -9,6 +9,7 @@ const Login = () => {
     name: "",
     email: "",
     password: "",
+    apiError: "",
   });
 
   const name = useRef(null);
@@ -22,6 +23,10 @@ const Login = () => {
       return await firebaseApi.signUpWithEmailPassword(auth, email, password);
     } catch (error) {
       console.log("signupError: ", error);
+
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrors({ apiError: errorCode + "  " + errorMessage });
     }
   };
 
@@ -30,6 +35,10 @@ const Login = () => {
       return await firebaseApi.signInWithEmailPassword(auth, email, password);
     } catch (error) {
       console.log("signinError: ", error);
+
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrors({ apiError: errorCode + "  " + errorMessage });
     }
   };
 
@@ -122,6 +131,11 @@ const Login = () => {
             ? "New to Netflix? Sign Up Now"
             : "Already registered? Sign In Now."}
         </p>
+        {errors.apiError && (
+          <p className="text-md text-red-500 font-semibold">
+            {errors.apiError}
+          </p>
+        )}
       </form>
     </div>
   );
