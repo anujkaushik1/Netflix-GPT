@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkEmailNamePasswordForLogin } from "../utils/validation";
+import { auth, firebaseApi } from "../firebase/firebase";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -16,6 +17,22 @@ const Login = () => {
 
   const handleAlreadyRegistered = () => setIsSignIn(!isSignIn);
 
+  const signUpUser = async ({ name, email, password } = {}) => {
+    try {
+      return await firebaseApi.signUpWithEmailPassword(auth, email, password);
+    } catch (error) {
+      console.log("signupError: ", error);
+    }
+  };
+
+  const signInUser = async ({ email, password } = {}) => {
+    try {
+      return await firebaseApi.signInWithEmailPassword(auth, email, password);
+    } catch (error) {
+      console.log("signinError: ", error);
+    }
+  };
+
   const handleSigninSignUp = () => {
     const validationResponse = checkEmailNamePasswordForLogin({
       name: name.current?.value,
@@ -24,6 +41,22 @@ const Login = () => {
     });
 
     setErrors(validationResponse);
+
+    for (const key in validationResponse) {
+      if (validationResponse[key]) return;
+    }
+
+    if (isSignIn)
+      return signInUser({
+        email: email.current?.value,
+        password: password.current.value,
+      });
+
+    signUpUser({
+      name: "",
+      email: email.current?.value,
+      password: password.current.value,
+    });
   };
 
   return (
