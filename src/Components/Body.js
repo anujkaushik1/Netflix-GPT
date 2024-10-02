@@ -31,12 +31,9 @@ const Body = () => {
         {
           path: "/browse",
           element: <Browse />,
-        },
-        {
-          path: '/test'
         }
-      ],
-    },
+      ]
+    }
   ]);
 
   return <RouterProvider router={appRouter}></RouterProvider>;
