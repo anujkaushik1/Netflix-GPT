@@ -7,7 +7,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Browse } from "./Browse";
-import useAuthenticationHandler from "../hooks/useAuthenticationHandler";
 import AuthenticationHandler from "./AuthenticationHandler";
 
 const Layout = () => {
@@ -33,6 +32,9 @@ const Body = () => {
           path: "/browse",
           element: <Browse />,
         },
+        {
+          path: '/test'
+        }
       ],
     },
   ]);
