@@ -1,15 +1,11 @@
 import React from "react";
 
-
 const VideoTitle = () => {
-
-
-
-
-
-  
-
-  return <div>VideoTitle</div>;
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default VideoTitle;

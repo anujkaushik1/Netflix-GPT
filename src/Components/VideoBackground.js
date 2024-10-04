@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import useTrailerVideo from "../hooks/useTrailerVideo";
-const VideoBackground = () => {
-  const moviesData = useSelector((store) => store.movies?.nowPlayingMovies);
-  const trailerInfo = useTrailerVideo({ trailerId: moviesData[2]?.id });
+const VideoBackground = ({ moviesData = [] }) => {
+  console.log("anuj wold movivesdata = ", moviesData);
+
+  const trailerInfo = useTrailerVideo({ trailerId: moviesData?.[1]?.id });
 
   if (trailerInfo?.success === false) {
     return;
