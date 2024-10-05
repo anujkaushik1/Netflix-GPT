@@ -1,10 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import useTrailerVideo from "../hooks/useTrailerVideo";
-const VideoBackground = ({ moviesData = [] }) => {
-  console.log("anuj wold movivesdata = ", moviesData);
-
-  const trailerInfo = useTrailerVideo({ trailerId: moviesData?.[1]?.id });
+const VideoBackground = ({ id }) => {
+  const trailerInfo = useTrailerVideo({ trailerId: id });
 
   if (trailerInfo?.success === false) {
     return;
@@ -17,11 +14,10 @@ const VideoBackground = ({ moviesData = [] }) => {
   return (
     <div>
       <iframe
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/${youtubeInfo?.key}`}
+        className="min-w-[100%] h-[100vh]  aspect-video overflow-hidden"
+        src={`https://www.youtube.com/embed/${youtubeInfo?.key}?autoplay=1&mute=true&controls=0`}
         title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="autoplay"
       ></iframe>
     </div>
   );

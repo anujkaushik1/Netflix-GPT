@@ -3,11 +3,11 @@ import { TMDB_API_OPTIONS } from "../utils/constants";
 
 const useTrailerVideo = ({ trailerId } = {}) => {
 
+ 
   const [trailerInfo, setTrailerInfo] = useState({});
 
   useEffect(() => {
-    if(trailerId)
-      fetchTrailerInformation();
+    if (trailerId) fetchTrailerInformation();
   }, [trailerId]);
 
   const fetchTrailerInformation = async () => {
