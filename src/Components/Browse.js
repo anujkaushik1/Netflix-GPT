@@ -1,12 +1,12 @@
 import React from 'react'
-import useNowPlayingMoviesData from '../hooks/useNowPlayingMoviesData';
+import useLoadMoviesData from '../hooks/useLoadMoviesData';
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
 
 
 export const Browse = () => {
 
-  useNowPlayingMoviesData();
+  useLoadMoviesData();
 
   
 

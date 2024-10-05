@@ -4,10 +4,10 @@ import { getMovieImage } from "../utils/constants";
 
 export const MoviesList = ({ title, moviesData = [] }) => {
   return (
-    <div className="ml-6 font-sans mb-4 relative bottom-28 bg-none">
+    <div className="ml-6 font-sans relative bottom-28 bg-none">
       <h1 className="text-2xl font-semibold text-white">{title}</h1>
 
-      <div className="relative ">
+      <div className="relative mt-4">
         <div className="flex overflow-scroll no-scrollbar">
           {moviesData.map((movie) => (
             <MovieCard img={getMovieImage(movie?.poster_path)} />
