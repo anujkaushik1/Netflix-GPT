@@ -4,7 +4,7 @@ import { getMovieImage } from "../utils/constants";
 
 export const MoviesList = ({ title, moviesData = [] }) => {
   return (
-    <div className="ml-6 font-sans mb-4 relative bottom-28">
+    <div className="ml-6 font-sans mb-4 relative bottom-28 bg-none">
       <h1 className="text-2xl font-semibold text-white">{title}</h1>
 
       <div className="relative ">
