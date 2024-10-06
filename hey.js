@@ -1,9 +1,7 @@
-const styles = {
-    buttonStyles: 'w-36 bg-gray-400 h-16 rounded-md font-bold text-center mt-8'
-  }
 
+let a = [2], b = [2,3,5];
+const y = (a.length || b.length) && console.log('world');
+;
 
-  const a = styles.buttonStyles + "w-38";
+console.log(y);
 
-  console.log(a);
-  

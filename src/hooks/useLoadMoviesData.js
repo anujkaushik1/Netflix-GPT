@@ -1,13 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies, addPopularMovies } from "../store/slices/movies";
 import { TMDB_API_OPTIONS } from "../utils/constants";
 
 const useLoadMoviesData = () => {
   const dispatch = useDispatch();
+  const { nowPlayingMovies, popularMovies } = useSelector(
+    (store) => store.movies
+  );
 
   useEffect(() => {
-    fetchMovies();
+    !(nowPlayingMovies.length || popularMovies.length) && fetchMovies();
   }, []);
   const loadMoviePromise = async (title) => {
     try {
